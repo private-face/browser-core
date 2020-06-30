@@ -23,7 +23,7 @@ module.exports = {
   platform: 'webextension',
   specific: 'browser',
   baseURL: '/modules/',
-  pack: 'web-ext build -s build -a .',
+  pack: 'web-ext build -s build -a . --overwrite-dest',
   sign: `python ./xpi-sign/xpisign.py -k $CLIQZ_CERT_PATH --signer openssl --passin file:$CLIQZ_CERT_PASS_PATH ${packageName}-$VERSION.zip ${packageName}-$PACKAGE_VERSION.xpi`,
   publish: `${publish.toEdge(packageName, channel, 'xpi')} && \
      aws s3 cp build/updates.json ${updateS3Url} --acl public-read && \
@@ -35,7 +35,7 @@ module.exports = {
   artifactUrl,
   settings: Object.assign({}, urls, settings, {
     id,
-    name: 'browserAppNameNightly',
+    name: 'browserAppNameNext',
     channel: '40',
     homepageURL: 'https://cliqz.com/',
     freshTabNews: false,

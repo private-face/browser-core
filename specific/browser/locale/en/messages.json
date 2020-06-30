@@ -5,6 +5,9 @@
     "browserAppName": {
         "message": "Cliqz"
     },
+    "browserAppNameNext": {
+        "message": "Cliqz (Next)"
+    },
     "browserAppNameNightly": {
         "message": "Cliqz (Nightly)"
     },
