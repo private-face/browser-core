@@ -735,7 +735,7 @@ export default background({
         NEW_TAB_URL: '',
         HISTORY_URL,
         isBetaVersion: isBetaVersion(),
-        isUserOnboarded: this.isUserOnboarded(),
+        isUserOnboarded:true, // this.isUserOnboarded(),
         onboardingVersion: this.onboardingVersion(),
         tooltip: this.tooltip,
         showConsentDialog: isAMO && !prefs.get('consentDialogShown', false),
