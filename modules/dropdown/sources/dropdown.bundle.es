@@ -132,7 +132,7 @@ const exportedActions = {
 runtime.onMessage.addListener(({ module, action, args, contextId }) => {
   if (module !== 'dropdown'
     || action !== 'renderResults'
-    || (contextId !== undefined && contextId !== currentContextId)
+    // || (contextId !== undefined && contextId !== currentContextId)
   ) {
     return undefined;
   }
