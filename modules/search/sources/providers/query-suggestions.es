@@ -12,6 +12,9 @@ import normalize from '../operators/normalize';
 import { PREVENT_AUTOCOMPLETE_KEYS } from '../consts';
 
 import BaseProvider from './base';
+import { QuerySanitizerWithHistory } from './cliqz/query-sanitizer';
+
+const querySanitizer = new QuerySanitizerWithHistory();
 
 export default class QuerySuggestionProvider extends BaseProvider {
   constructor() {
@@ -35,11 +38,13 @@ export default class QuerySuggestionProvider extends BaseProvider {
       return this.getEmptySearch(config, query);
     }
 
+    const sanitizedQuery = querySanitizer.sanitize(query, { rememberSafeQueries: true });
+
     const engine = searchUtils.getDefaultSearchEngine();
     return this.getResultsFromPromise(
-      searchUtils.getSuggestions(query).then(([q, suggestions]) =>
+      searchUtils.getSuggestions(sanitizedQuery).then(([q, suggestions]) =>
         suggestions
-          .filter(suggestion => suggestion !== query)
+          .filter(suggestion => suggestion !== sanitizedQuery)
           .map(suggestion =>
             normalize({
               query: q,

@@ -65,6 +65,7 @@ module.exports = {
     INSIGHTS_INTERNAL: true,
   }),
   default_prefs: {
+    'suggestionChoice': 2,
     'modules.search.operators.addCompletion.useTitle': false,
     'modules.freshtab.customBackground': true,
     'modules.search.providers.cliqz.enabled': false,

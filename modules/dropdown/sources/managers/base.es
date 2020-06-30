@@ -446,6 +446,7 @@ export default class BaseDropdownManager {
         const query = this.query;
         const urlbarValueMatchesResultQuery = !this.selectedResult
           || this.selectedResult.query === query
+          || this.selectedResult.type === 'supplementary-search'
           || this.selectedResult.urlbarValue === query;
 
         if (this.isOpen && urlbarValueMatchesResultQuery) {
