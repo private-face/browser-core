@@ -17,11 +17,6 @@ import templates from './templates';
 import Dropdown from './dropdown';
 import Results from './results';
 
-let currentContextId;
-if (chrome.omnibox2) {
-  currentContextId = chrome.omnibox2.getContext();
-}
-
 let currentQueryId = 0;
 let previousResults;
 
@@ -129,10 +124,9 @@ const exportedActions = {
   },
 };
 
-runtime.onMessage.addListener(({ module, action, args, contextId }) => {
+runtime.onMessage.addListener(({ module, action, args }) => {
   if (module !== 'dropdown'
     || action !== 'renderResults'
-    // || (contextId !== undefined && contextId !== currentContextId)
   ) {
     return undefined;
   }
