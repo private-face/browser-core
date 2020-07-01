@@ -21,7 +21,7 @@ const artifactUrl = `${artifactUrlPrefix}latest.xpi`;
 
 module.exports = {
   platform: 'webextension',
-  specific: 'browser',
+  specific: 'next',
   baseURL: '/modules/',
   pack: 'web-ext build -s build -a . --overwrite-dest',
   sign: `python ./xpi-sign/xpisign.py -k $CLIQZ_CERT_PATH --signer openssl --passin file:$CLIQZ_CERT_PASS_PATH ${packageName}-$VERSION.zip ${packageName}-$PACKAGE_VERSION.xpi`,

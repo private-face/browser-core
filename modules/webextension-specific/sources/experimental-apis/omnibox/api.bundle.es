@@ -11,13 +11,30 @@ import Dropdown from './dropdownapi';
 import URLBar from './urlbar';
 import ExtensionGlobals from '../shared/extension-globals';
 
-const { EventManager, windowTracker } = ExtensionGlobals;
+const { EventManager, Services, windowTracker } = ExtensionGlobals;
+const TIMERS = `
+  ChromeUtils.defineModuleGetter(
+    this,
+    "clearTimeout",
+    "resource://gre/modules/Timer.jsm"
+  );
+  ChromeUtils.defineModuleGetter(
+    this,
+    "setTimeout",
+    "resource://gre/modules/Timer.jsm"
+  );
+`;
 
 const assert = (condition, errorMessage) => {
   if (!condition) {
     throw new ExtensionGlobals.ExtensionError(errorMessage || '');
   }
 };
+
+Services.scriptloader.loadSubScript(
+  `data:text/plain,${TIMERS}`,
+  global, 'UTF-8'
+);
 
 /**
  * Extension API that replaces default Firefox autocomplete with Cliqz search

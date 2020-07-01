@@ -1,0 +1,113 @@
+{
+  "name": "__MSG_{{name}}__",
+  "description": "__MSG_browserAppDesc__",
+  "version": "{{version}}",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "applications": {
+    "gecko": {
+      "id": "cliqz@cliqz.com",
+      "update_url": "{{updateUrl}}",
+      "strict_min_version": "77"
+    }
+  },
+  "experiment_apis": {
+    "omnibox2": {
+      "schema": "modules/webextension-specific/experimental-apis/omnibox/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["omnibox2"]],
+        "script": "modules/webextension-specific/experimental-apis/omnibox/api.bundle.js"
+      },
+      "child": {
+        "scopes": ["addon_child"],
+        "paths": [["omnibox2"]],
+        "script": "modules/webextension-specific/experimental-apis/omnibox/api-child.bundle.js"
+      }
+    },
+    "cliqz": {
+      "schema": "modules/webextension-specific/experimental-apis/cliqz/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["cliqz"]],
+        "script": "modules/webextension-specific/experimental-apis/cliqz/api.bundle.js"
+      },
+      "child": {
+        "scopes": ["addon_child"],
+        "paths": [["cliqz"]],
+        "script": "modules/webextension-specific/experimental-apis/cliqz/api-child.bundle.js"
+      }
+    },
+    "cliqzHistory": {
+      "schema": "modules/webextension-specific/experimental-apis/cliqzHistory/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["cliqzHistory"]],
+        "script": "modules/webextension-specific/experimental-apis/cliqzHistory/api.bundle.js"
+      }
+    }
+  },
+  "browser_action": {
+    "default_title": "__MSG_control_center_icon_tooltip__",
+    "default_icon": "modules/control-center/images/cc-active.svg",
+    "default_popup": "modules/control-center/index.html"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "modules/video-downloader/images/video-downloader.svg",
+      "38": "modules/video-downloader/images/video-downloader.svg"
+    },
+    "default_title": "__MSG_video_downloader_title__",
+    "default_popup": "modules/video-downloader/index.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "bookmarks",
+    "clipboardWrite",
+    "cookies",
+    "downloads",
+    "geolocation",
+    "history",
+    "idle",
+    "management",
+    "notifications",
+    "contextMenus",
+    "privacy",
+    "proxy",
+    "storage",
+    "tabs",
+    "activeTab",
+    "topSites",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData",
+    "dns"
+  ],
+  "background": {
+    "scripts": [
+      "modules/vendor/math-expression-evaluator.min.js",
+      "modules/vendor/dexie.min.js",
+      "modules/webextension-specific/app.bundle.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "modules/freshtab/home.html"
+  },
+  "chrome_settings_overrides": {
+    "homepage": "modules/freshtab/home.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "run_at": "document_start",
+      "match_about_blank": true,
+      "all_frames": true,
+      "js": ["modules/core/content-script.bundle.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    "modules/autoconsent/popup.html"
+  ]
+}

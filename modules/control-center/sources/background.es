@@ -29,6 +29,8 @@ import analyses from './telemetry/analyses';
 
 const TELEMETRY_TYPE = 'control_center';
 
+const browserAction = chrome?.browserAction2 || chrome?.browserAction || null;
+
 function isInternalProtocol(url) {
   const internalProtocols = ['chrome', 'resource', 'moz-extension', 'chrome-extension'];
   return internalProtocols.findIndex(protocol => url.startsWith(protocol)) > -1;
@@ -101,9 +103,9 @@ export default background({
     this.intervals = new IntervalManager();
 
     // set default badge color and text
-    if (chrome && chrome.browserAction2) {
-      chrome.browserAction2.setBadgeBackgroundColor({ color: '#471647' });
-      chrome.browserAction2.setBadgeText({ text: '0' });
+    if (browserAction) {
+      browserAction.setBadgeBackgroundColor({ color: '#471647' });
+      browserAction.setBadgeText({ text: '0' });
     }
   },
 
@@ -130,8 +132,8 @@ export default background({
       this.intervals.remove(windowId);
     }
 
-    if (isInternalProtocol(url) && chrome && chrome.browserAction2) {
-      chrome.browserAction2.setBadgeText({ text: null, tabId });
+    if (isInternalProtocol(url) && browserAction) {
+      browserAction.setBadgeText({ text: null, tabId });
     }
     // wait for tab content to load
     if (!url
@@ -164,8 +166,8 @@ export default background({
   },
 
   updateBadge(tabId, info) {
-    if (typeof chrome !== 'undefined' && chrome.browserAction2 && info !== undefined) {
-      chrome.browserAction2.setBadgeText({ text: `${info}`, tabId }, () => {
+    if (typeof chrome !== 'undefined' && browserAction && info !== undefined) {
+      browserAction.setBadgeText({ text: `${info}`, tabId }, () => {
         if (chrome.runtime.lastError) {
           // do nothing in case something went wrong
         }
@@ -361,13 +363,13 @@ export default background({
     },
 
     setState(tabId, state) {
-      if (!chrome.browserAction2) {
+      if (!browserAction) {
         return;
       }
 
       const icon = globalConfig.baseURL + this.ICONS[state];
 
-      chrome.browserAction2.setIcon({
+      browserAction.setIcon({
         path: {
           16: icon,
           48: icon,
@@ -375,7 +377,7 @@ export default background({
         },
         tabId
       });
-      chrome.browserAction2.setBadgeBackgroundColor({ color: '#471647', tabId });
+      browserAction.setBadgeBackgroundColor({ color: '#471647', tabId });
     },
 
     openURL(data) {
