@@ -153,6 +153,10 @@ export default class BaseResult {
     return url;
   }
 
+  get jumpToResultUrl() {
+    return this.url;
+  }
+
   get displayUrl() {
     return this.rawResult.url;
   }
@@ -250,14 +254,17 @@ export default class BaseResult {
 
   click(href, ev, meta = {}) {
     if (this.isUrlMatch(href)) {
-      const newTab = ev.altKey || ev.metaKey || ev.ctrlKey || ev.button === 1;
-      const noSwitch = newTab || ev.shiftKey;
+      const newTab = ev.metaKey || ev.ctrlKey || ev.button === 1;
+      const noSwitch = newTab || ev.altKey;
+      const jumpToResult = ev.shiftKey;
+      const url = jumpToResult ? this.jumpToResultUrl : this.url;
 
-      this.resultTools.actions.openLink(this.url, {
+      this.resultTools.actions.openLink(url, {
         result: this.serialize(),
         resultOrder: this.resultTools.results.kinds,
         newTab,
         noSwitch,
+        jumpToResult,
         eventType: ev instanceof MouseEvent ? 'mouse' : 'keyboard',
         eventOptions: {
           type: ev.type,

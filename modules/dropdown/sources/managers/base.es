@@ -13,7 +13,14 @@ const KEYS_TO_IGNORE = new Set(['Unidentified', 'Dead']);
 const MODIFIERS = ['ctrl', 'alt', 'shift', 'meta'];
 
 function getKeyModifier(ev) {
-  return MODIFIERS.find(k => ev[`${k}Key`]) || null;
+  return MODIFIERS.reduce((acc, modifier) => {
+    acc[modifier] = ev[`${modifier}Key`];
+    return acc;
+  }, {});
+}
+
+function didModifierChange(modifier = {}, ev) {
+  return MODIFIERS.some(m => ev[`${m}Key`] !== modifier[m]);
 }
 
 function serializeEvent({ type, button, ctrlKey, altKey, shiftKey, metaKey }) {
@@ -399,8 +406,8 @@ export default class BaseDropdownManager {
   }
 
   onKeyup(ev) {
-    const modifier = getKeyModifier(ev);
-    if (this._urlbarAttributes.modifier !== modifier) {
+    if (didModifierChange(this._urlbarAttributes.modifier, ev)) {
+      const modifier = getKeyModifier(ev);
       this.updateUrlbarAttributes({ modifier });
     }
   }
@@ -408,8 +415,8 @@ export default class BaseDropdownManager {
   onKeydown(ev) {
     this._lastEvent = ev;
     let preventDefault = false;
-    const modifier = getKeyModifier(ev);
-    if (modifier) {
+    if (didModifierChange(this._urlbarAttributes.modifier, ev)) {
+      const modifier = getKeyModifier(ev);
       this.updateUrlbarAttributes({ modifier });
     }
     switch (ev.key) {

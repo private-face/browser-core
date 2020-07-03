@@ -123,7 +123,9 @@ export default class Dropdown {
 
   updateUrlbarAttributes(attrs) {
     if ('modifier' in attrs) {
-      document.body.classList[attrs.modifier ? 'add' : 'remove']('modifier');
+      Object.keys(attrs.modifier).forEach((modifier) => {
+        document.body.classList[attrs.modifier[modifier] ? 'add' : 'remove'](`modifier-${modifier}`);
+      });
     }
 
     if ('padding' in attrs) {
@@ -145,6 +147,11 @@ export default class Dropdown {
 
   clear() {
     this.selectedIndex = 0;
+    document.body.classList.forEach((className) => {
+      if (className.startsWith('modifier-')) {
+        document.body.classList.remove(className);
+      }
+    });
   }
 
   getSelectedResultIndex(newResults, queryId) {

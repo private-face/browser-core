@@ -150,6 +150,7 @@ export default class BrowserDropdownManager extends BaseDropdownManager {
     url,
     {
       newTab,
+      jumpToResult,
       eventType,
       result,
       ...rest
@@ -170,7 +171,7 @@ export default class BrowserDropdownManager extends BaseDropdownManager {
       || !url
       || !result.query.trim()
       || isFromFirstAutocompletedURL
-      || isUrl(result.query)
+      || (isUrl(result.query) && !jumpToResult)
     ) {
       this._lastQuery.hideLastQuery(tabId);
     } else {

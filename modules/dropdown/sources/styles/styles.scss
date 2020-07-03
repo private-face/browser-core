@@ -926,9 +926,17 @@ $basic-line-height: (16 / 14) + 0em;
     }
 }
 
-.modifier {
+.modifier-alt, .modifier-meta, .modifier-ctrl {
     .switchtab {
         background-image: none!important;
+    }
+}
+
+.modifier-shift {
+    .icon {
+        &.search {
+            background-image: url-prefix("dropdown/images/urlbar-jump.svg")!important;
+        }
     }
 }
 

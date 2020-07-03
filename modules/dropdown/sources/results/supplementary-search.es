@@ -8,6 +8,8 @@
 
 import BaseResult from './base';
 
+const JUMP_TO_RESULT = 'https://duckduckgo.com/?q=\\';
+
 export default class SupplementarySearchResult extends BaseResult {
   isUrlMatch(href) {
     // we need to override isUrlMatch as in some cases the value of
@@ -61,5 +63,9 @@ export default class SupplementarySearchResult extends BaseResult {
 
   get displayUrl() {
     return this.rawResult.data.suggestion;
+  }
+
+  get jumpToResultUrl() {
+    return JUMP_TO_RESULT + this.query;
   }
 }
