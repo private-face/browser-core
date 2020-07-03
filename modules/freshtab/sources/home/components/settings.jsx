@@ -206,40 +206,44 @@ export default class Settings extends React.Component {
                   )
                 }
 
-                <div className="settings-row">
-                  <div>
-                    <span className="label">{t('app_settings_news_label')}</span>
-                    <Switch
-                      isChecked={componentsState.news.visible}
-                      toggleComponent={() => this.props.toggleComponent('news')}
-                    />
-                  </div>
-                  {!componentsState.news.visible ? (
-                    ''
-                  ) : (
-                    <div className="news-editions-wrapper">
-                      <select
-                        className="news-editions-select"
-                        value={componentsState.news.preferedCountry}
-                        onChange={this.onNewsSelectionChanged}
-                        tabIndex="-1"
-                      >
-                        {componentsState.news.availableEditions.map(edition =>
-                          (
-                            <option
-                              className="news-edition-option"
-                              value={edition.code}
-                              key={edition.code}
-                            >
-                              {edition.name}
-                            </option>
-                          ))
-                        }
-                      </select>
+                {this.props.areNewsSupported
+                  && (
+                    <div className="settings-row">
+                      <div>
+                        <span className="label">{t('app_settings_news_label')}</span>
+                        <Switch
+                          isChecked={componentsState.news.visible}
+                          toggleComponent={() => this.props.toggleComponent('news')}
+                        />
+                      </div>
+                      {!componentsState.news.visible ? (
+                        ''
+                      ) : (
+                        <div className="news-editions-wrapper">
+                          <select
+                            className="news-editions-select"
+                            value={componentsState.news.preferedCountry}
+                            onChange={this.onNewsSelectionChanged}
+                            tabIndex="-1"
+                          >
+                            {componentsState.news.availableEditions.map(edition =>
+                              (
+                                <option
+                                  className="news-edition-option"
+                                  value={edition.code}
+                                  key={edition.code}
+                                >
+                                  {edition.name}
+                                </option>
+                              ))
+                            }
+                          </select>
+                        </div>
+                      )
+                      }
                     </div>
                   )
-                  }
-                </div>
+                }
 
                 {this.props.isAllPrefsLinkSupported
                   && (
@@ -270,6 +274,7 @@ Settings.propTypes = {
   isBrowserThemeSupported: PropTypes.bool,
   isAllPrefsLinkSupported: PropTypes.bool,
   isStatsSupported: PropTypes.bool,
+  areNewsSupported: PropTypes.bool,
   onBackgroundImageChanged: PropTypes.func,
   onCustomBackgroundImageUploaded: PropTypes.func,
   onNewsSelectionChanged: PropTypes.func,

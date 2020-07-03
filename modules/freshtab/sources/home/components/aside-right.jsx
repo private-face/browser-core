@@ -29,8 +29,8 @@ function AsideRight({
   toggleComponent,
   toggleSettings,
 }) {
-  const shouldShowDeveloperModulesIcon = config.developer === true
-    || config.isBetaVersion === true;
+  const shouldShowDeveloperModulesIcon = false && (config.developer === true
+    || config.isBetaVersion === true);
 
   return (
     <aside className="aside">
@@ -44,6 +44,7 @@ function AsideRight({
           isBrowserThemeSupported={config.isBrowserThemeSupported}
           isAllPrefsLinkSupported={config.isAllPrefsLinkSupported}
           isStatsSupported={config.isStatsSupported}
+          areNewsSupported={config.areNewsSupported}
           onBackgroundImageChanged={onBackgroundImageChanged}
           onCustomBackgroundImageUploaded={onCustomBackgroundImageUploaded}
           onNewsSelectionChanged={onNewsSelectionChanged}

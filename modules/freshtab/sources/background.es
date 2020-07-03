@@ -290,7 +290,7 @@ export default background({
     return {
       historyDials: { ...COMPONENT_STATE_VISIBLE, ...freshtabConfig.historyDials },
       customDials: {
-        ...(this.hasCustomDialups() ? COMPONENT_STATE_VISIBLE : COMPONENT_STATE_INVISIBLE),
+        ...(this.hasCustomDialups() ? COMPONENT_STATE_INVISIBLE : COMPONENT_STATE_VISIBLE),
         ...freshtabConfig.customDials,
       },
       search: {
@@ -299,7 +299,7 @@ export default background({
         mode: prefs.get(config.constants.PREF_SEARCH_MODE, 'urlbar'),
       },
       news: {
-        ...COMPONENT_STATE_VISIBLE,
+        ...COMPONENT_STATE_INVISIBLE,
         ...freshtabConfig.news,
         availableEditions: await this.news.action('getAvailableLanguages'),
         preferedCountry: await this.news.action('getLanguage'),
@@ -309,7 +309,7 @@ export default background({
         index: wallpapers.findIndex(bg => bg.name === backgroundName),
       },
       stats: {
-        ...(isAMO ? COMPONENT_STATE_INVISIBLE : COMPONENT_STATE_VISIBLE),
+        ...COMPONENT_STATE_INVISIBLE,
         ...freshtabConfig.stats,
       },
     };
@@ -732,6 +732,7 @@ export default background({
         developer: prefs.get('developer', false),
         cliqzPostPosition: 'bottom-left', // bottom-right, top-right
         isStatsSupported: this.settings.freshTabStats,
+        areNewsSupported: this.settings.freshTabNews,
         NEW_TAB_URL: '',
         HISTORY_URL,
         isBetaVersion: isBetaVersion(),
