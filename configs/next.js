@@ -12,7 +12,7 @@ const settings = require('./common/amo-settings');
 const publish = require('./common/publish');
 
 const id = 'cliqz@cliqz.com';
-const packageName = 'cliqz_nightly_';
+const packageName = 'cliqz_next_';
 const channel = 'browser_beta';
 const artifactUrlPrefix = publish.edgeLatestUrl(channel);
 const updateS3Url = `${publish.edgeLatestS3Url(channel)}updates.json`;
@@ -37,32 +37,18 @@ module.exports = {
     id,
     name: 'browserAppNameNext',
     channel: '40',
-    homepageURL: 'https://cliqz.com/',
+    homepageURL: 'https://github.com/private-face/browser-core',
     freshTabNews: false,
     freshTabStats: false,
-    helpMenus: true,
     suggestions: false,
     onboardingVersion: 4,
     onBoardingPref: 'browserOnboarding',
-    ENDPOINT_ANONPATTERNSURL: 'https://cdn.cliqz.com/browser-f/patterns-anon',
-    ENDPOINT_HUMAN_WEB_PATTERNS: 'https://cdn.cliqz.com/browser-f/hw-patterns.gz',
-    ENDPOINT_PATTERNSURL: 'https://cdn.cliqz.com/browser-f/patterns',
-    HW_CHANNEL: 'cliqz',
-    ONBOARDING_URL: 'onboarding-v4/index.html',
-    HISTORY_URL: 'history/home.html',
-    'modules.history.search-path': '?query=',
     ICONS: {
       active: 'control-center/images/cc-active.svg',
       inactive: 'control-center/images/cc-critical.svg',
       critical: 'control-center/images/cc-critical.svg'
     },
-    ATTRACK_TELEMETRY_PROVIDER: 'hpnv2',
-    DISABLE_ATTRACK_TELEMETRY: true,
-    ALLOWED_COUNTRY_CODES: ['de', 'at', 'ch', 'es', 'us', 'fr', 'nl', 'gb', 'it', 'se'],
-    antitrackingPlaceholder: 'cliqz.com/tracking',
-    antitrackingHeader: 'CLIQZ-AntiTracking',
     FRESHTAB_TITLE: 'Cliqz Tab',
-    INSIGHTS_INTERNAL: true,
   }),
   default_prefs: {
     'suggestionChoice': 2,
@@ -73,20 +59,15 @@ module.exports = {
   modules: [
     'core',
     'dropdown',
-    'abtests-legacy',
     'webextension-specific',
     'geolocation',
     'omnibox',
     'freshtab',
     'news',
-    'antitracking',
     'webrequest-pipeline',
     'control-center',
-    'adblocker',
-    'https-everywhere',
     'video-downloader',
     'search',
-    'toolbox',
     'autoconsent',
     'dat',
   ],
@@ -95,14 +76,9 @@ module.exports = {
     'webextension-specific/app.bundle.js',
     'freshtab/home.bundle.js',
     'dropdown/dropdown.bundle.js',
-    'dropdown/debug.bundle.js',
     'control-center/control-center-react.bundle.js',
-    'toolbox/toolbox.bundle.js',
     'video-downloader/video-downloader.bundle.js',
-    'search/debug.bundle.js',
-    'search/inspect.bundle.js',
     'search/mixer.bundle.js',
-    'webextension-specific/experimental-apis/browser-action/api.bundle.js',
     'webextension-specific/experimental-apis/cliqz/api.bundle.js',
     'webextension-specific/experimental-apis/cliqz/api-child.bundle.js',
     'webextension-specific/experimental-apis/demographics/api.bundle.js',
