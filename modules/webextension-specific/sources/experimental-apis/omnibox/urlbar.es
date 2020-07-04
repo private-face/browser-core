@@ -5,7 +5,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
-/* global ChromeUtils */
+/* global ChromeUtils, Components */
 import EventEmitter from '../../../core/event-emitter';
 
 import LastQuery from './last-query';
@@ -14,6 +14,8 @@ import { PASSIVE_LISTENER_OPTIONS, stopEvent } from '../../../dropdown/managers/
 
 const { Services } = ChromeUtils.import('resource://gre/modules/Services.jsm');
 const AC_PROVIDER_NAME = 'cliqz-results';
+
+const Ci = Components.interfaces;
 
 const noop = () => {};
 
@@ -418,8 +420,24 @@ export default class URLBar extends EventEmitter {
       controller.input.value = url;
     }
 
-    const keydownEnterEvent = new window.KeyboardEvent('keydown', { key: 'Enter' });
-    urlbar.handleCommand(keydownEnterEvent, options.target);
+    // const keydownEnterEvent = new window.KeyboardEvent('keydown', { key: 'Enter' });
+    // urlbar.handleCommand(keydownEnterEvent, options.target);
+
+    // == This is a temporary fix for Firefox bug 1649981 ==
+    // It is already landed on Nightly https://github.com/mozilla/gecko-dev/commit/bb3d9d9c746771efb0aac435aface3a845b17479,
+    // so let's just wait until it goes live and go back to using `urlbar.handleCommand`
+    /* eslint-disable */
+    const flags =
+      Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS |
+      Ci.nsIURIFixup.FIXUP_FLAG_ALLOW_KEYWORD_LOOKUP |
+      Ci.nsIURIFixup.FIXUP_FLAG_PRIVATE_CONTEXT;
+
+    const openParams = {};
+    const postData = {};
+    const uri = Services.uriFixup.createFixupURI(url, flags, postData);
+    openParams.postData = postData.value;
+    urlbar._loadURL(uri.spec, options.target, openParams, null, window.gBrowser.selectedBrowser);
+    /* eslint-enable */
 
     if (options.target === 'tabshifted') {
       if (focused) {
