@@ -186,6 +186,7 @@ export default class Dropdown extends LifeCycle {
     // otherwise they will be visible during extension init/update (see EX-9266)
     cliqzToolbar.style.display = 'block';
     browser.style.display = 'block';
+    browser.style.height = '0';
     cliqzToolbar.style.height = 0;
     cliqzToolbar.style.minHeight = 0;
     cliqzToolbar.style.padding = 0;

@@ -129,7 +129,7 @@ export function unifiedSearch(query, isPrivate) {
           ready: true
         });
       }
-    }, true);
+    }, null);
   });
 }
 
