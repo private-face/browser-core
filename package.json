@@ -8,7 +8,7 @@
   },
   "main": "build/index.js",
   "browserslist": [
-    "Firefox 84"
+    "Firefox 52"
   ],
   "files": [
     "build/*"
