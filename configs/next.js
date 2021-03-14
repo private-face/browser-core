@@ -48,10 +48,10 @@ module.exports = {
       inactive: 'control-center/images/cc-critical.svg',
       critical: 'control-center/images/cc-critical.svg'
     },
-    FRESHTAB_TITLE: 'Cliqz Tab',
+    FRESHTAB_TITLE: 'New Tab',
   }),
   default_prefs: {
-    'suggestionChoice': 2,
+    suggestionChoice: 2,
     'modules.search.operators.addCompletion.useTitle': false,
     'modules.freshtab.customBackground': true,
     'modules.search.providers.cliqz.enabled': false,
@@ -63,7 +63,7 @@ module.exports = {
     'geolocation',
     'omnibox',
     'freshtab',
-    'news',
+    // 'news',
     'webrequest-pipeline',
     'control-center',
     'video-downloader',
@@ -93,7 +93,7 @@ module.exports = {
     }),
   }),
   buildTargets: {
-    firefox: 77,
+    firefox: 84,
   },
   PRODUCT_PREFIX: 'cliqz',
 };

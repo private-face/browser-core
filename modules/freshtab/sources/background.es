@@ -112,7 +112,7 @@ export default background({
   ui: inject.module('ui'),
   insights: inject.module('insights'),
   history: inject.module('history'),
-  news: inject.module('news'),
+  // news: inject.module('news'),
 
   // Services dependencies
   geolocation: inject.service('geolocation', ['setLocationPermission']),
@@ -301,8 +301,8 @@ export default background({
       news: {
         ...COMPONENT_STATE_INVISIBLE,
         ...freshtabConfig.news,
-        availableEditions: await this.news.action('getAvailableLanguages'),
-        preferedCountry: await this.news.action('getLanguage'),
+        availableEditions: [], // await this.news.action('getAvailableLanguages'),
+        preferedCountry: 'intl' // await this.news.action('getLanguage'),
       },
       background: {
         image: backgroundName,
@@ -461,9 +461,9 @@ export default background({
       }
     },
 
-    async updateTopNewsCountry(preferedCountry) {
+    async updateTopNewsCountry(/* preferedCountry */) {
       // TODO: add proper error handling in UI
-      await this.news.action('setLanguage', preferedCountry);
+      // await this.news.action('setLanguage', preferedCountry);
 
       this.updateComponentState('news', {
         hasUserChangedLanguage: true,
@@ -574,7 +574,7 @@ export default background({
         };
       }
 
-      return this.news.action('getNews');
+      return {}; // this.news.action('getNews');
     },
 
     /**
