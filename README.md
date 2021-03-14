@@ -1,5 +1,7 @@
 # Browser Core
 
+![test](https://github.com/private-face/browser-core/actions/workflows/test.yml/badge.svg)
+
 Cliqz features are available on multiple platforms: browsers for Windows and Mac, (based on Mozilla/Firefox), for iOS (based on Mozilla/Firefox), and for Android (based on Lightning). In addition, the Cliqz for Firefox browser extension offers key Cliqz functions for Firefox users.
 
 Browser Core is used in:

@@ -99,7 +99,8 @@ module.exports = (program) => {
               host: 'localhost',
               port: '4200',
               launch: launchers || (CONFIG.testem_launchers_ci || []).join(','),
-              reporter: Reporter,
+              // tap_failed_tests_only: true,
+              // reporter: Reporter,
               serve_files: serveFiles,
             };
 

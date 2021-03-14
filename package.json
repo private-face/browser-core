@@ -8,12 +8,17 @@
   },
   "main": "build/index.js",
   "browserslist": [
-    "Firefox 52"
+    "Firefox 84"
   ],
   "files": [
     "build/*"
   ],
   "scripts": {
+    "start": "node ./fern.js serve configs/next.js --firefox firefoxdeveloperedition",
+    "build": "node ./fern.js build configs/next.js --environment=production",
+    "pack": "node ./fern.js pack configs/next.js",
+    "test": "node ./fern.js test configs/ci/unit-tests.js -l unit-node",
+    "test:ci": "node ./fern.js test configs/ci/unit-tests.js -l unit-node --ci",
     "typecheck": "tsc --project ./tsconfig.json"
   },
   "dependencies": {

@@ -5,7 +5,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
-/* global ChromeUtils, Components */
+/* global ChromeUtils */
 import EventEmitter from '../../../core/event-emitter';
 
 import LastQuery from './last-query';
@@ -14,8 +14,6 @@ import { PASSIVE_LISTENER_OPTIONS, stopEvent } from '../../../dropdown/managers/
 
 const { Services } = ChromeUtils.import('resource://gre/modules/Services.jsm');
 const AC_PROVIDER_NAME = 'cliqz-results';
-
-const Ci = Components.interfaces;
 
 const noop = () => {};
 
