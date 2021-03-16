@@ -128,7 +128,7 @@ module.exports = (program) => {
                 notifier.notify({
                   title: 'Fern',
                   message: 'Build complete',
-                  time: 1500
+                  timeout: 3
                 });
 
                 if (!isRunning) {
@@ -164,8 +164,7 @@ module.exports = (program) => {
           notifier.notify({
             title: 'Fern',
             message: msg,
-            type: 'warn',
-            time: 3000
+            timeout: 5
           });
         });
       });

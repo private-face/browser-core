@@ -146,7 +146,7 @@ module.exports = (program) => {
           notifier.notify({
             title: 'Fern',
             message: 'Build complete',
-            time: 1500
+            timeout: 3
           });
         });
 
@@ -154,8 +154,7 @@ module.exports = (program) => {
           notifier.notify({
             title: 'Fern',
             message: `Build error - ${err}`,
-            type: 'warn',
-            time: 3000
+            timeout: 5
           });
         });
       }).catch(console.error);
