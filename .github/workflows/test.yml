@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -11,5 +11,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12
-    - run: npm ci
+
+    - name: Cache dependencies
+      id: cache-node
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.OS }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install dependencies
+      if: steps.cache-node.outputs.cache-hit != 'true'
+    
     - run: npm run test:ci
