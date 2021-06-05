@@ -145,6 +145,7 @@ export default class Dropdown extends LifeCycle {
     browser.setAttribute('type', 'content');
     browser.setAttribute('id', 'cliqz-popup');
     browser.setAttribute('disableglobalhistory', 'true');
+    browser.setAttribute('messagemanagergroup', 'webext-browsers');
     browser.setAttribute('transparent', 'true');
     browser.setAttribute('class', 'webextension-popup-browser');
     browser.setAttribute('webextension-view-type', 'popup');
