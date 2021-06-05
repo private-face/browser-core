@@ -47,11 +47,6 @@
       }
     }
   },
-  "browser_action": {
-    "default_title": "__MSG_control_center_icon_tooltip__",
-    "default_icon": "modules/control-center/images/cc-active.svg",
-    "default_popup": "modules/control-center/index.html"
-  },
   "page_action": {
     "default_icon": {
       "19": "modules/video-downloader/images/video-downloader.svg",

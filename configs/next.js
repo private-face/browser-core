@@ -63,12 +63,9 @@ module.exports = {
     'geolocation',
     'omnibox',
     'freshtab',
-    // 'news',
     'webrequest-pipeline',
-    'control-center',
     'video-downloader',
     'search',
-    'autoconsent',
     'dat',
   ],
   bundles: [
